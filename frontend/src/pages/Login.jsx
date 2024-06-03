@@ -54,8 +54,8 @@ const Login = () => {
             <button type="submit" className="btn-primary">Login</button>
 
             <p className="text-sm text-center mt-4">
-              Not registered yet?{" "}
-              <Link to="/signup" className="font-medium text-primary underline">Create an Account</Link>
+              {`Don't have an account?`}{" "}
+              <Link to="/signup" className="font-medium text-primary underline">Sign up</Link>
             </p>
           </form>
         </div>
