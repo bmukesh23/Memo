@@ -1,6 +1,6 @@
-import ProfileInfo from "./Cards/ProfileInfo";
+import ProfileInfo from "../Cards/ProfileInfo";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
 
 const Navbar = () => {

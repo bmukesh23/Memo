@@ -1,8 +1,8 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { Link } from "react-router-dom";
-import PasswordInput from "../components/Input/PasswordInput";
+import PasswordInput from "../../components/Input/PasswordInput";
 import { useState } from "react";
-import { validateEmail } from "../utils/helper";
+import { validateEmail } from "../../utils/helper";
 
 const Login = () => {
 
