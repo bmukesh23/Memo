@@ -3,6 +3,7 @@ import { useState } from "react"
 import TagInput from "../../components/Input/TagInput"
 import { MdClose } from "react-icons/md";
 import axiosInstance from "../../utils/axiosInstance";
+import { toast } from "react-toastify";
 
 const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   const [title, setTitle] = useState(noteData?.title || "");
@@ -23,10 +24,12 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       if (response.data && response.data.note) {
         getAllNotes();
         onClose();
+        toast.success("Note Added Successfully");
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
+        toast.error("Failed to add note. Please try again.");
       }
     }
   }
@@ -45,10 +48,12 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       if (response.data && response.data.note) {
         getAllNotes();
         onClose();
+        toast.success("Note Updated Successfully");
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
+        toast.error("Failed to add note. Please try again.");
       }
     }
   }
@@ -113,4 +118,5 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
     </div>
   )
 }
-export default AddEditNotes
+
+export default AddEditNotes;

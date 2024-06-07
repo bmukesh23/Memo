@@ -22,7 +22,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleEdit = (noteDetails) => {
-    setOpenAddEditModal({ isShown: true, data: noteDetails, type: "edit"});
+    setOpenAddEditModal({ isShown: true, data: noteDetails, type: "edit" });
   };
 
   // Get User Info
@@ -75,8 +75,8 @@ const Home = () => {
               tags={item.tags}
               isPinned={item.isPinned}
               onEdit={() => handleEdit(item)}
-              onDelete={() => {}}
-              onPinNote={() => {}}
+              onDelete={() => { }}
+              onPinNote={() => { }}
             />
           ))}
         </div>
@@ -98,7 +98,7 @@ const Home = () => {
             backgroundColor: "rgba(0,0,0,0.2)",
           },
         }}
-        contentLabel=""
+        contentLabel="Edit Note Modal"
         className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5"
       >
         <AddEditNotes
@@ -107,7 +107,7 @@ const Home = () => {
           onClose={() => {
             setOpenAddEditModal({ isShown: false, type: "add", data: null });
           }}
-          getAllNotes = { getAllNotes }
+          getAllNotes={getAllNotes}
         />
       </Modal>
     </>
