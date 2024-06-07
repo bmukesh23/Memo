@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar"
 import PasswordInput from "../../components/Input/PasswordInput";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axiosInstance";
 
 const SignUp = () => {
 
@@ -11,26 +12,53 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    if(!name){
+    if (!name) {
       setError("Please enter your name");
       return;
     }
 
-    if(!validateEmail(email)) {
+    if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
       return;
     }
 
-    if(!password) {
+    if (!password) {
       setError("Please enter the password");
       return;
     }
 
-    setError("")  
     //Signup API Call
+    try {
+      const response = await axiosInstance.post("/create-account", {
+        fullName: name,
+        email: email,
+        password: password,
+      });
+
+      if (response.data && response.data.error) {
+        setError(response.data.message);
+        return;
+      }
+
+      //Handle successful registration response
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/dashboard");
+      }
+
+    } catch (error) {
+      //Handle registration error
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("An unexpected error occured. Please try again.");
+      }
+    }
   }
 
   return (
@@ -70,7 +98,7 @@ const SignUp = () => {
 
             <p className="text-sm text-center mt-4">
               Already have an account?{" "}
-               <Link to="/login" className="font-medium text-primary underline">Log in</Link>
+              <Link to="/login" className="font-medium text-primary underline">Log in</Link>
             </p>
           </form>
         </div>
