@@ -31,4 +31,9 @@
     .input-label{
         @apply text-xs text-slate-400;
     }
+
+    .input-label-focus{
+        @apply  focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200;
+    }
+   
 }
