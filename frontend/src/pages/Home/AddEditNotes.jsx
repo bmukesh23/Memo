@@ -53,7 +53,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
-        toast.error("Failed to add note. Please try again.");
+        toast.error("Failed to update note. Please try again.");
       }
     }
   }
