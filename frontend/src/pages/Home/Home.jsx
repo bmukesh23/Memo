@@ -7,6 +7,8 @@ import Modal from "react-modal";
 import axiosInstance from "../../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
+Modal.setAppElement('#root');
+
 const Home = () => {
   const [openAddEditModal, setOpenAddEditModal] = useState({
     isShown: false,
@@ -18,6 +20,10 @@ const Home = () => {
   const [userInfo, setUserInfo] = useState(null);
 
   const navigate = useNavigate();
+
+  const handleEdit = (noteDetails) => {
+    setOpenAddEditModal({ isShown: true, data: noteDetails, type: "edit"});
+  };
 
   // Get User Info
   const getUserInfo = async () => {
@@ -68,6 +74,9 @@ const Home = () => {
               content={item.content}
               tags={item.tags}
               isPinned={item.isPinned}
+              onEdit={() => handleEdit(item)}
+              onDelete={() => {}}
+              onPinNote={() => {}}
             />
           ))}
         </div>
@@ -98,6 +107,7 @@ const Home = () => {
           onClose={() => {
             setOpenAddEditModal({ isShown: false, type: "add", data: null });
           }}
+          getAllNotes = { getAllNotes }
         />
       </Modal>
     </>
