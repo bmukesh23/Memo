@@ -7,5 +7,5 @@ A Notes App built with MERN which contains functionalities like Authentication (
 - `React`
 - `Tailwind CSS`
 - `Node.js`
-- `Express.js`
+- `Express`
 - `MongoDB`
