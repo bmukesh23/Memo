@@ -1,0 +1,15 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "/login",
+            "statusCode": 302
+        }
+    ]
+}
