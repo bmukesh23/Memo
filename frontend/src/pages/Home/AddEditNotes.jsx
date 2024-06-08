@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-import TagInput from "../../components/Input/TagInput"
+import TagInput from "../../components/Inputs/TagInput"
 import { MdClose } from "react-icons/md";
 import axiosInstance from "../../utils/axiosInstance";
 import { toast } from "react-toastify";
