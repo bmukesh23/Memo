@@ -1,5 +1,5 @@
 # 📝 NoteUp
-A note taking web app built with MERN.
+A note taking website built with MERN.
 
 ## 📦 Technologies
 
