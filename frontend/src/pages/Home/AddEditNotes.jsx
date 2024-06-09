@@ -35,7 +35,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   }
 
   // Edit Note
-  const editNote = async () => { 
+  const editNote = async () => {
     const noteId = noteData._id;
 
     try {
