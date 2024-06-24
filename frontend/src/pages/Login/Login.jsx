@@ -102,7 +102,7 @@ const Login = () => {
 
             <button onClick={handleAuth} className="google-btn flex justify-center items-center gap-2">
               {/* <FaGoogle/> Login with Google */}
-              <img src="../../../public/google.svg" alt="google"/>
+              <img src="/google.svg" alt="google"/>
               Login with Google
             </button>
 
