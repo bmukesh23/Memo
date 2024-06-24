@@ -54,7 +54,7 @@ const Home = () => {
         setAllNotes(response.data.notes);
       }
     } catch (error) {
-      console.log("An Unexpected error occurre. Please try again.");
+      console.log("An Unexpected error occurred. Please try again.");
     }
   }
 
