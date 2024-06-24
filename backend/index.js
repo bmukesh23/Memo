@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const { authenticateToken } = require("./utilities");
 const User = require("./models/user.model");
@@ -30,33 +29,23 @@ app.post("/create-account", async (req, res) => {
     if (!password) {
         res.status(400).json({ error: true, message: "Password is required" });
     }
-    try {
-        const existingUser = await User.findOne({ email: email }).lean();
-        if (existingUser) {
-            return res.status(400).json({ error: true, message: "User already exists" });
-        }
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({
-            fullName,
-            email,
-            password: hashedPassword,
-        });
-        await newUser.save();
-        const accessToken = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "36000" });
-        return res.json({
-            error: false,
-            user: {
-                _id: newUser._id,
-                fullName: newUser.fullName,
-                email: newUser.email,
-            },
-            accessToken,
-            message: "Registration Successful",
-        });
-    } catch (error) {
-        console.error('Sign-up error:', error);
-        return res.status(500).json({ error: true, message: "Internal Server Error" });
+    const isUser = await User.findOne({ email: email });
+    if (isUser) {
+        return res.json({ error: true, message: "User already exists" });
     }
+    const user = new User({
+        fullName,
+        email,
+        password,
+    });
+    await user.save();
+    const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "36000m" });
+    return res.json({
+        error: false,
+        user,
+        accessToken,
+        message: "Registration Successful",
+    });
 });
 // Login
 app.post("/login", async (req, res) => {
@@ -67,29 +56,23 @@ app.post("/login", async (req, res) => {
     if (!password) {
         return res.status(400).json({ error: true, message: "Password is required" });
     }
-    try {
-        const userInfo = await User.findOne({ email: email }).lean();
-        if (!userInfo) {
-            return res.status(400).json({ error: true, message: "User not found" });
-        }
-        const isMatch = await bcrypt.compare(password, userInfo.password);
-        if (!isMatch) {
-            return res.status(400).json({ error: true, message: "Invalid Credentials" });
-        }
-        const user = { id: userInfo._id, email: userInfo.email };
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "36000" });
+    const userInfo = await User.findOne({ email: email });
+    if (!userInfo) {
+        return res.status(400).json({ error: true, message: "User not found" });
+    }
+    if (userInfo.email == email && userInfo.password == password) {
+        const user = { user: userInfo }
+        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "36000m" });
         return res.json({
             error: false,
             message: "Login Successful",
             accessToken,
-            email: userInfo.email,
+            email,
         });
-    } catch (error) {
-        console.error('Login error:', error);
-        return res.status(500).json({ error: true, message: "Internal Server Error" });
+    } else {
+        return res.status(400).json({ error: true, message: "Invalid Credentials" });
     }
 });
-
 // Get User
 app.get("/get-user", authenticateToken, async (req, res) => {
     const { user } = req.user;
@@ -230,13 +213,16 @@ app.put("/update-note-pinned/:noteId", authenticateToken, async (req, res) => {
         });
     }
 });
+
 // Search Notes
 app.get("/search-notes/", authenticateToken, async (req, res) => {
     const { user } = req.user;
     const { query } = req.query;
+
     if (!query) {
         return res.status(400).json({ error: true, message: "Search query is required" });
     }
+
     try {
         const matchingNotes = await Note.find({
             userId: user._id,
@@ -245,6 +231,7 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
                 { content: { $regex: new RegExp(query, "i") } },
             ],
         });
+
         return res.json({
             error: false,
             notes: matchingNotes,
@@ -257,5 +244,7 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
         });
     }
 });
+
 app.listen(config.PORT, () => console.log(`Server Started at ${config.PORT}`));
+
 module.exports = app;
