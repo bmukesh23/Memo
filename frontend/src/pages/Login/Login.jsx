@@ -100,7 +100,11 @@ const Login = () => {
 
             <button type="submit" className="btn-primary">Login</button>
 
-            <button onClick={handleAuth}>Login with Google</button>
+            <button onClick={handleAuth} className="google-btn flex justify-center items-center gap-2">
+              {/* <FaGoogle/> Login with Google */}
+              <img src="../../../public/google.svg" alt="google"/>
+              Login with Google
+            </button>
 
             <p className="text-sm text-center mt-4">
               {`Don't have an account?`}{" "}

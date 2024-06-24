@@ -24,6 +24,10 @@
         @apply w-full text-sm bg-primary text-white p-2 rounded my-1 hover:bg-blue-600;
     }
 
+    .google-btn{
+        @apply w-full text-sm bg-slate-700 text-white p-2 rounded my-1 hover:bg-slate-800;
+    }
+
     .icon-btn{
         @apply text-xl text-slate-300 cursor-pointer hover:text-primary;
     }
