@@ -4,8 +4,8 @@ import PasswordInput from "../../components/Inputs/PasswordInput";
 import { useState } from "react";
 import { validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
-import { auth, provider } from "../../utils/firebaseConfig";
-import { signInWithPopup } from "firebase/auth";
+// import { auth, provider } from "../../utils/firebaseConfig";
+// import { signInWithPopup } from "firebase/auth";
 
 const Login = () => {
 
@@ -15,28 +15,29 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleAuth = async () => {
-    await signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const user = result.user;
+  // const handleAuth = async () => {
+  //   await signInWithPopup(auth, provider)
+  //     .then(async (result) => {
+  //       const user = result.user;
 
-        try {
-          const response = await axiosInstance.post("/generate-token", {
-            email: user.email,
-            fullName: user.displayName,
-          });
+  //       try {
+  //         const response = await axiosInstance.post("/generate-token", {
+  //           uid: user.uid,
+  //           email: user.email,
+  //           fullName: user.displayName,
+  //         });
 
-          if (response.data && response.data.customToken) {
-            localStorage.setItem("token", response.data.customToken);
-            navigate("/dashboard");
-          }
+  //         if (response.data && response.data.customToken) {
+  //           localStorage.setItem("token", response.data.customToken);
+  //           navigate("/dashboard");
+  //         }
 
-        } catch (error) {
-          console.error('Authentication error:', error);
-          setError('Authentication failed. Please try again.');
-        }
-      });
-  }
+  //       } catch (error) {
+  //         console.error('Authentication error:', error);
+  //         setError('Authentication failed. Please try again.');
+  //       }
+  //     });
+  // }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -100,11 +101,10 @@ const Login = () => {
 
             <button type="submit" className="btn-primary">Login</button>
 
-            <button onClick={handleAuth} className="google-btn flex justify-center items-center gap-2">
-              {/* <FaGoogle/> Login with Google */}
+            {/* <button onClick={handleAuth} className="google-btn flex justify-center items-center gap-2">
               <img src="/google.svg" alt="google"/>
               Login with Google
-            </button>
+            </button> */}
 
             <p className="text-sm text-center mt-4">
               {`Don't have an account?`}{" "}

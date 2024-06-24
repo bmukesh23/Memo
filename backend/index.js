@@ -94,7 +94,7 @@ app.post("/login", async (req, res) => {
             return res.status(400).json({ error: true, message: "User not found" });
         }
 
-        const isMatch = await bcrypt.compare(password, userInfo.password);
+        const isMatch = bcrypt.compare(password, userInfo.password);
 
         if (!isMatch) {
             return res.status(400).json({ error: true, message: "Invalid Credentials" });
@@ -116,43 +116,44 @@ app.post("/login", async (req, res) => {
 });
 
 // Google Auth
-app.post('/generate-token', async (req, res) => {
-    const { email, fullName } = req.body;
+// app.post('/generate-token', async (req, res) => {
+//     const { email, fullName } = req.body;
 
-    if (!email) {
-        return res.status(400).json({ error: true, message: "Email is required" });
-    }
+//     if (!email) {
+//         return res.status(400).json({ error: true, message: "Email is required" });
+//     }
 
-    if (!fullName) {
-        return res.status(400).json({ error: true, message: "Name is required" });
-    }
+//     if (!fullName) {
+//         return res.status(400).json({ error: true, message: "Name is required" });
+//     }
 
-    try {
-        let userInfo = await User.findOne({ email: email }).lean();
+//     try {
+//         let userInfo = await User.findOne({ email: email }).lean();
 
-        if (!userInfo) {
-            const newUser = new User({
-                fullName,
-                email
-            });
-            userInfo = await newUser.save();
-        }
+//         if (!userInfo) {
+//             const newUser = new User({
+//                 fullName,
+//                 email,
+//                 password: "123345678"
+//             });
+//             userInfo = await newUser.save();
+//         }
 
-        // const customToken = await admin.auth().createCustomToken(uid);
-        const customToken = jwt.sign({ id: userInfo._id, email: userInfo.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+//         // const customToken = await admin.auth().createCustomToken(uid);
+//         const customToken = jwt.sign({ id: userInfo._id, email: userInfo.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
 
-        return res.json({
-            error: false,
-            email: userInfo.email,
-            message: "Authentication is done successfully",
-            customToken,
-        });
+//         return res.json({
+//             error: false,
+//             email: userInfo.email,
+//             message: "Authentication is done successfully",
+//             customToken,
+//         });
 
-    } catch (error) {
-        console.error('Auth error:', error);
-        return res.status(500).json({ error: true, message: "Internal Server Error" });
-    }
-});
+//     } catch (error) {
+//         console.error('Auth error:', error);
+//         return res.status(500).json({ error: true, message: "Internal Server Error" });
+//     }
+// });
 
 // Get User
 app.get("/get-user", authenticateToken, async (req, res) => {
