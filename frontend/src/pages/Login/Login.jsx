@@ -4,6 +4,8 @@ import PasswordInput from "../../components/Inputs/PasswordInput";
 import { useState } from "react";
 import { validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
+import { auth, provider } from "../../utils/firebaseConfig";
+import { signInWithPopup } from "firebase/auth";
 
 const Login = () => {
 
@@ -12,6 +14,29 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  const handleAuth = async () => {
+    await signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
+
+        try {
+          const response = await axiosInstance.post("/generate-token", {
+            email: user.email,
+            fullName: user.displayName,
+          });
+
+          if (response.data && response.data.customToken) {
+            localStorage.setItem("token", response.data.customToken);
+            navigate("/dashboard");
+          }
+
+        } catch (error) {
+          console.error('Authentication error:', error);
+          setError('Authentication failed. Please try again.');
+        }
+      });
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -74,6 +99,8 @@ const Login = () => {
             {error && <p className="text-red-500 text-xs pb-1">{error}</p>}
 
             <button type="submit" className="btn-primary">Login</button>
+
+            <button onClick={handleAuth}>Login with Google</button>
 
             <p className="text-sm text-center mt-4">
               {`Don't have an account?`}{" "}
