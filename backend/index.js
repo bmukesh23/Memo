@@ -12,13 +12,7 @@ mongoose.connect(config.connectionString).then(() => console.log("MongoDB connec
 
 const app = express();
 app.use(express.json());
-
-const corsOptions = {
-    origin: 'https://noteup-ai.vercel.app',
-    optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 const userRoutes = require('./routes/users');
 const noteRoutes = require('./routes/notes');
