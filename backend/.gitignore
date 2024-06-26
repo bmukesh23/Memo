@@ -16,3 +16,6 @@
 # local env files
 .env*.local
 .env
+
+#secretkey
+serviceAccountKey.json
