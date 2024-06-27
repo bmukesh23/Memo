@@ -22,7 +22,7 @@ const SignUp = () => {
       });
 
       if (response.data) {
-        console.log("User Data:", response.data);
+        // console.log("User Data:", response.data);
         navigate("/dashboard");
       }
 
