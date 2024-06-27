@@ -4,13 +4,9 @@ A note taking website built with MERN.
 ## 📦 Technologies
 
 - `Vite`
-- `React`
 - `Tailwind CSS`
 - `Firebase`
-- `Node.js`
-- `Express`
-- `MongoDB`
-
+- `MERN`
 
 ## ✨ Features
 
