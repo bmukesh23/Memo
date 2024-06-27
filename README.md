@@ -6,6 +6,7 @@ A note taking website built with MERN.
 - `Vite`
 - `React`
 - `Tailwind CSS`
+- `Firebase`
 - `Node.js`
 - `Express`
 - `MongoDB`
@@ -15,7 +16,7 @@ A note taking website built with MERN.
 
 Here's what you can do with NoteUp:
 
-- **User Authentication**: Users can securely sign up, log in, and access notes using JWT (JSON Web Tokens).
+- **User Authentication**: Users can securely sign-in and access notes using Firebase Authentication integrated with JWT (JSON Web Tokens).
 
 - **CRUD Operations**: Users can create new notes, view existing notes, update/edit notes, and delete notes. Each note could have fields such as title, content, date, and tags.
 
@@ -63,6 +64,20 @@ Before you begin, ensure you have the following installed on your machine:
     ```
 
 4. **Set Environment Variables:**
+    1. Create a `.env` file in the root of the backend folder of the project.
+    2. Add the following environment variables and replace the values with your own:
+
+    ```env
+    VITE_FB_API_KEY=
+    VITE_FB_AUTH=
+    VITE_FB_PROJECT=
+    VITE_FB_STORAGE=
+    VITE_FB_MESSAGING=
+    VITE_FB_APP=
+    VITE_FB_MEASUREMENT=
+    VITE_BACKEND_URL=
+    ```
+
     1. Create a `.env` file in the root of the backend folder of the project.
     2. Add the following environment variables and replace the values with your own:
 
