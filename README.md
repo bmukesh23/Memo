@@ -15,11 +15,11 @@ An minimal AI powered note taking app built with MERN and Gemini API.
 
 - **AI Powered:** Memo uses AI to help you write better notes and documents.
 
-- **User Authentication:** Users can securely sign-in and access notes using Firebase Authentication integrated with JWT (JSON Web Tokens).
+- **User Authentication:** Users can securely sign in and access notes with Firebase Auth integrated with JWT.
 
-- **Search Functionality**: Allow users to search for notes by keywords, titles, or tags to quickly find the information they need.
+- **Search Functionality**: Allow users to search notes by keywords, titles, or tags to quickly find information.
 
-- **Pin/Unpin Notes**: Enables users to pin important notes for quick access and unpin them when no longer needed, ensuring easy retrieval of crucial information.
+- **Pin/Unpin Notes**: Enable users to pin important notes for quick access and unpin them when no longer needed.
 
 ## 💭 Future Scope
 - **Markdown:** A markdown which has WYSIWYG editor feature.
