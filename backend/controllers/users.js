@@ -15,7 +15,8 @@ exports.getAllUsers = async (req, res) => {
                 fullName: isUser.fullName,
                 email: isUser.email,
                 _id: isUser._id,
-                createdOn: isUser.createdOn
+                createdOn: isUser.createdOn,
+                imageURL: isUser.imageURL,
             },
             message: "User retrieved successfully",
         });

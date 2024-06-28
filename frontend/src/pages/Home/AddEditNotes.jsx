@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import TagInput from "../../components/Inputs/TagInput"
 import { MdClose } from "react-icons/md";
 import axiosInstance from "../../utils/axiosInstance";
@@ -9,8 +9,31 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   const [title, setTitle] = useState(noteData?.title || "");
   const [content, setContent] = useState(noteData?.content || "");
   const [tags, setTags] = useState(noteData?.tags || []);
-
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = async (e) => {
+      if (e.key === '+') {
+        const lastTwoChars = content.slice(-1);
+        console.log(lastTwoChars);
+        if (lastTwoChars === '+') {
+          e.preventDefault();
+          try {
+            const response = await axiosInstance.post('/gemini', { content });
+            setContent(content.slice(0, -1) + response.data.text);
+          } catch (error) {
+            console.error('Error communicating with the Gemini API', error);
+            toast.error('Failed to autocomplete content. Please try again.');
+          }
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [content]);
 
   // Add Note
   const addNewNote = async () => {
@@ -98,7 +121,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
         <textarea
           type="text"
           className="text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded resize-none border border-slate-300 input-label-focus"
-          placeholder="content"
+          placeholder={`Write your notes here or Press '++' for AI autocomplete...`}
           rows={10}
           value={content}
           onChange={(e) => setContent(e.target.value)}

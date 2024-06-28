@@ -1,11 +1,31 @@
 /* eslint-disable react/prop-types */
-import { getInitials } from "../../utils/helper"
+import { useEffect, useState } from "react";
+import axiosInstance from "../../utils/axiosInstance";
 
-const ProfileInfo = ({userInfo, onLogout }) => {
+const ProfileInfo = ({ userInfo, onLogout }) => {
+  const [profile, setProfile] = useState(null);
+
+  const getUserProfile = async () => {
+    try {
+      const response = await axiosInstance.get("/get-user");
+
+      if (response.data && response.data.user) {
+        setProfile(response.data.user.imageURL);
+      }
+    } catch (error) {
+      console.error(" Picture not found:", error);
+    }
+
+  }
+
+  useEffect(() => {
+    getUserProfile();
+  });
+
   return (
     <div className="flex items-center gap-3">
-      <div className="w-12 h-12 flex items-center justify-center rounded-full text-slate-950 font-medium bg-slate-100">
-        {getInitials(userInfo?.fullName)}
+      <div className="">
+        <img src={profile} alt="profile" className="w-10 h-10 flex items-center justify-center rounded-full" />
       </div>
 
       <div>
@@ -18,4 +38,4 @@ const ProfileInfo = ({userInfo, onLogout }) => {
   )
 }
 
-export default ProfileInfo
+export default ProfileInfo;

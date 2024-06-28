@@ -16,6 +16,7 @@ app.use(cors());
 
 const userRoutes = require('./routes/users');
 const noteRoutes = require('./routes/notes');
+const geminiRoutes = require('./routes/gemini');
 
 app.get("/", (req, res) => {
     res.json({ data: "hello" });
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use(userRoutes);
 app.use(noteRoutes);
+app.use(geminiRoutes);
 
 app.listen(config.PORT, () => console.log(`Server Started at ${config.PORT}`));
 
