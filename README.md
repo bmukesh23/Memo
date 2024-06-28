@@ -1,5 +1,5 @@
-# 📝 NoteUp
-A note taking website built with MERN.
+# 🫧 Memo
+An minimal AI powered note taking app.
 
 ## 📦 Technologies
 
@@ -7,25 +7,22 @@ A note taking website built with MERN.
 - `Tailwind CSS`
 - `Firebase`
 - `MERN`
+- `Gemini API`
 
 ## ✨ Features
 
-Here's what you can do with NoteUp:
+- **Simple:** Memo is designed to be minimal, using it is a breeze.
 
-- **User Authentication**: Users can securely sign-in and access notes using Firebase Authentication integrated with JWT (JSON Web Tokens).
+- **AI Powered:** Memo uses AI to help you write better notes and documents.
 
-- **CRUD Operations**: Users can create new notes, view existing notes, update/edit notes, and delete notes. Each note could have fields such as title, content, date, and tags.
+- **User Authentication:** Users can securely sign-in and access notes using Firebase Authentication integrated with JWT (JSON Web Tokens).
 
 - **Search Functionality**: Allow users to search for notes by keywords, titles, or tags to quickly find the information they need.
 
 - **Pin/Unpin Notes**: Enables users to pin important notes for quick access and unpin them when no longer needed, ensuring easy retrieval of crucial information.
 
 ## 💭 Future Scope
-- **Integration of OpenAI API:** To transform notes web app into an intelligent assistant that augments user's productivity and enhances their overall note-taking experience.
-
-- **Enhanced Markdown Support:** This enhancement will offer features such as a visual editor for Markdown syntax, customizable themes, and real-time content preview.
-
-    Stay tuned for updates on this exciting addition to our project!
+- **Markdown:** A markdown which has WYSIWYG editor feature.
 
 ## 🚦Running the project:
 
@@ -40,12 +37,12 @@ Before you begin, ensure you have the following installed on your machine:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/bmukesh23/NoteUp.git
+    git clone https://github.com/bmukesh23/Memo.git
     ```
 
 2. **Navigate to the project directory:**
     ```bash
-    cd NoteUp
+    cd Memo
     ```
 
 3. **Install Dependencies:**
@@ -81,6 +78,7 @@ Before you begin, ensure you have the following installed on your machine:
     PORT=
     ACCESS_TOKEN_SECRET=
     MONGODB_URI=
+    GEMINI_API_KEY=
     ```
 
 5. **Run the application:**
