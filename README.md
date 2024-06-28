@@ -1,5 +1,5 @@
 # 🫧 Memo
-An minimal AI powered note taking app.
+An minimal AI powered note taking app built with MERN and Gemini API.
 
 ## 📦 Technologies
 
