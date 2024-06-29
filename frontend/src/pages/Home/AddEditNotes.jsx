@@ -100,27 +100,25 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   }
 
   return (
-    <div className="relative">
-      <button className="w-10 h-10 rounded-full flex items-center justify-center absolute -top-3 -right-3 hover:bg-slate-50" onClick={onClose}>
-        <MdClose className="text-xl text-slate-400 hover:text-slate-800" />
+    <section className="relative pt-8">
+      <button className="w-10 h-10 flex items-center justify-center absolute -top-4 -right-2.5" onClick={onClose}>
+        <MdClose className="text-xl text-slate-400 hover:text-white" />
       </button>
 
       <div className="flex flex-col gap-2">
-        <label className="input-label">TITLE</label>
         <input
           type="text"
-          className="text-2xl text-slate-950 outline-none input-label-focus border border-slate-300"
-          placeholder=" Daily Journal"
+          className="text-2xl bg-slate-700 outline-none p-2 rounded-md font-semibold"
+          placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
-        <label className="input-label">CONTENT</label>
         <textarea
           type="text"
-          className="text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded resize-none border border-slate-300 input-label-focus"
+          className="text-sm outline-none bg-slate-700 p-2 rounded-md resize-none font-semibold"
           placeholder={`Write your notes here or Press '++' for AI autocomplete...`}
           rows={10}
           value={content}
@@ -129,16 +127,15 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       </div>
 
       <div className="mt-3">
-        <label className="input-label">TAGS</label>
         <TagInput tags={tags} setTags={setTags} />
       </div>
 
       {error && <p className="text-red-500 text-xs pt-4">{error}</p>}
 
-      <button className="btn-primary font-medium mt-5 p-3" onClick={handleAddNote}>
+      <button className="btn-primary font-semibold mt-5 p-3" onClick={handleAddNote}>
         {type === "edit" ? "UPDATE" : "ADD"}
       </button>
-    </div>
+    </section>
   )
 }
 

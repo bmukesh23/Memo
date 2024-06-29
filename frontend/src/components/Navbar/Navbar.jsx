@@ -3,6 +3,7 @@ import ProfileInfo from "../Cards/ProfileInfo";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
+import logo from "/logo.svg"
 
 const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -25,8 +26,11 @@ const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
     }
 
     return (
-        <div className="bg-white flex items-center justify-between px-6 py-2 drop-shadow">
-            <h2 className="text-xl font-medium text-black py-2">Memo</h2>
+        <div className="flex items-center justify-between px-6 py-4">
+            <div className="flex items-center gap-1.5">
+                <img src={logo} alt="logo" className="mt-[0.25rem]"/>
+                <h2 className="text-2xl font-semibold py-2">memo</h2>
+            </div>
 
             {userInfo &&
                 <>

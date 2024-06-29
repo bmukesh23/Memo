@@ -1,4 +1,4 @@
-import { MdAdd } from "react-icons/md";
+import { AiOutlineFileAdd } from "react-icons/ai";
 import NoteCard from "../../components/Cards/NoteCard";
 import Navbar from "../../components/Navbar/Navbar";
 import AddEditNotes from "./AddEditNotes";
@@ -149,17 +149,18 @@ const Home = () => {
         ) : (
           <EmptyCard
             isSearch={isSearch}
-            message={isSearch ? `Oops! No notes found matching your search.` : `Start creating your first note! Click the 'Add' button to jot down your thoughts, ideas, and reminders. Let's get started!`}
+            message={isSearch ? `Oops! No notes found matching your search.` : `Start creating your first note! Click the 'New note' button to jot down your thoughts, ideas, and reminders. Let's get started!`}
           />
         )}
       </div>
 
       <button
-        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-primary hover:bg-blue-600 absolute right-10 bottom-10"
+        className="flex items-center justify-center absolute right-10 bottom-20 gap-2 border border-slate-600 p-2 rounded-lg"
         onClick={() => {
           setOpenAddEditModal({ isShown: true, type: "add", data: null });
         }}>
-        <MdAdd className="text-[32px] text-white" />
+        <AiOutlineFileAdd className="text-[25px] text-white" />
+        New note
       </button>
 
       <Modal
@@ -170,7 +171,7 @@ const Home = () => {
           },
         }}
         contentLabel="Edit Note Modal"
-        className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5"
+        className="w-1/2 max-h-3/4 bg-gray-800 rounded-md mx-auto mt-20 p-5"
       >
         <AddEditNotes
           type={openAddEditModal.type}

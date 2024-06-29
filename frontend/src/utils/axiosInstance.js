@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://memo-ai-backend.vercel.app",
+    baseURL: "http://localhost:8000",
     timeout: 10000,
     headers: {
         "Content-Type": "application/json",

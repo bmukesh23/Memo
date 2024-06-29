@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import { AiOutlineFileAdd } from "react-icons/ai";
-import { TbError404 } from "react-icons/tb";
+import addNoteSvg from "/note.svg";
+import errorSvg from "/error.svg";
 
 const EmptyCard = ({ isSearch, message }) => {
     return (
-        <div className="flex flex-col items-center justify-center mt-40">
-            {isSearch ? <TbError404 className="w-60 h-40 text-blue-800" /> : <AiOutlineFileAdd className="w-60 h-40 text-blue-800" />}
+        <div className="flex flex-col items-center justify-center mt-20">
+            {isSearch ? <img src={errorSvg} className="h-80 w-80" /> : <img src={addNoteSvg} className="h-80 w-80" />}
 
-            <p className="w-1/2 text-lg font-medium text-slate-700 text-center leading-7 mt-5">
+            <p className="w-1/3 text-md font-medium text-slate-400 text-center mt-5">
                 {message}
             </p>
         </div>
