@@ -1,5 +1,5 @@
 # 🫧 Memo
-Memo is a minimal, AI-powered note-taking app that keeps your notes structured and easily accessible.
+An minimal AI powered note taking app built with MERN and Gemini API.
 
 ## 📦 Technologies
 
