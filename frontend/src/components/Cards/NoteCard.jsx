@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import { MdOutlinePushPin, MdCreate, MdDelete } from "react-icons/md";
 import moment from "moment";
+import { MdOutlinePushPin, MdCreate, MdDelete } from "react-icons/md";
 
 const NoteCard = ({
     title,

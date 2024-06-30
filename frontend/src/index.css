@@ -4,22 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    *{
-        @apply box-border p-0 m-0 scroll-smooth;
-    }
+@layer base {
+  * {
+    @apply box-border p-0 m-0 scroll-smooth;
+  }
 
-    body{
-        @apply bg-gray-950 text-gray-50 overflow-x-hidden font-inter;
-    }
+  body {
+    @apply bg-gray-950 text-gray-50 overflow-x-hidden font-inter;
+  }
 }
 
-@layer components{   
-    .btn-primary{
-        @apply w-full text-sm bg-blue-600 text-white p-2 rounded my-1 hover:bg-blue-500;
-    }
-
-    .icon-btn{
-        @apply text-xl text-slate-300 cursor-pointer hover:text-blue-600;
-    }
+@layer components{
+  .btn-primary{
+    @apply w-full text-xs sm:text-sm bg-blue-600 text-white rounded my-1 hover:bg-blue-500;
+  }
 }

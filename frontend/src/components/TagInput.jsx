@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react"
 import { MdAdd, MdClose } from "react-icons/md"
 
@@ -28,7 +27,7 @@ const TagInput = ({ tags, setTags }) => {
             {tags?.length > 0 && (
                 <div className="flex items-center gap-2 flex-wrap mt-2">
                     {tags.map((tag, index) => (
-                        <span key={index} className="flex items-center gap-2 text-sm bg-slate-700 px-3 py-1 rounded font-semibold">
+                        <span key={index} className="flex items-center gap-2 text-xs sm:text-sm bg-slate-700 px-3 py-1 rounded font-semibold">
                             # {tag}
                             <button
                                 onClick={() => {
@@ -45,7 +44,7 @@ const TagInput = ({ tags, setTags }) => {
             <div className="flex items-center gap-3 mt-3">
                 <input
                     type="text"
-                    className="text-sm bg-slate-700 px-3 py-2 rounded outline-none font-semibold"
+                    className="text-xs sm:text-sm bg-slate-700 px-1 sm:px-3 py-2 rounded outline-none font-semibold"
                     placeholder="Add tags"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
@@ -58,7 +57,7 @@ const TagInput = ({ tags, setTags }) => {
                         addNewTag();
                     }}
                 >
-                    <MdAdd className="text-2xl" />
+                    <MdAdd className="text-lg sm:text-2xl" />
                 </button>
             </div>
         </div>

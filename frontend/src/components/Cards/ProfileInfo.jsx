@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
+import { Skeleton } from "../ui/skeleton";
 import { IoIosLogOut } from "react-icons/io";
+import axiosInstance from "@/utils/axiosInstance";
 
 const ProfileInfo = ({ userInfo, onLogout }) => {
   const [profile, setProfile] = useState(null);
@@ -21,16 +21,18 @@ const ProfileInfo = ({ userInfo, onLogout }) => {
 
   useEffect(() => {
     getUserProfile();
-  });
+  }, []);
 
   return (
     <section className="flex items-center">
       <div className="flex items-center gap-2 bg-slate-800 py-1 px-2 rounded-lg">
-        <img src={profile} alt="profile" className="w-10 h-10 flex items-center justify-center rounded-md" />
+        {profile ? <img src={profile} alt="profile" className="w-6 h-6 sm:w-10 sm:h-10 flex items-center justify-center rounded-md" /> : <Skeleton className="w-6 h-6 sm:w-10 sm:h-10 rounded-md bg-slate-400" />}
+
         <div className="mr-2">
-          <p className="text-xs">Signed in as</p>
-          <p className="text-sm font-semibold text-slate-400">{userInfo?.fullName}</p>
+          <p className="text-[10px] sm:text-xs">Signed in as</p>
+          <p className="text-xs sm:text-sm font-semibold text-slate-400">{userInfo?.fullName}</p>
         </div>
+
         <IoIosLogOut onClick={onLogout} className="text-2xl hover:cursor-pointer" />
       </div>
     </section>

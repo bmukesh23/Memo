@@ -1,13 +1,14 @@
-import { AiOutlineFileAdd } from "react-icons/ai";
-import NoteCard from "../../components/Cards/NoteCard";
-import Navbar from "../../components/Navbar/Navbar";
-import AddEditNotes from "./AddEditNotes";
 import { useState, useEffect } from "react";
-import Modal from "react-modal";
-import axiosInstance from "../../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
 import { toast } from "react-toastify";
-import EmptyCard from "../../components/Cards/EmptyCard";
+import { AiOutlineFileAdd } from "react-icons/ai";
+import AddEditNotes from "./AddEditNotes";
+import axiosInstance from "@/utils/axiosInstance";
+import EmptyCard from "@/components/Cards/EmptyCard";
+import Navbar from "@/layouts/Navbar";
+import NoteCard from "@/components/Cards/NoteCard";
+import SearchBar from "@/layouts/SearchBar";
 
 Modal.setAppElement('#root');
 
@@ -129,9 +130,13 @@ const Home = () => {
     <>
       <Navbar userInfo={userInfo} onSearchNote={onSearchNote} handleClearSearch={handleClearSearch} />
 
-      <div className="container mx-auto">
+      <div className="mx-auto">
+        <div className="block sm:hidden mt-6 sm:mt-0">
+          <SearchBar />
+        </div>
+
         {allNotes.length > 0 ? (
-          <div className="grid grid-cols-3 gap-4 mt-8 mx-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 mx-10">
             {allNotes.map((item) => (
               <NoteCard
                 key={item._id}
@@ -155,11 +160,11 @@ const Home = () => {
       </div>
 
       <button
-        className="flex items-center justify-center absolute right-10 bottom-20 gap-2 border border-slate-600 p-2 rounded-lg"
+        className="flex items-center justify-center absolute right-5 sm:right-10 bottom-5 sm:bottom-20 gap-2 border border-slate-600 p-[0.4rem] sm:p-2 rounded-lg text-sm sm:text-base"
         onClick={() => {
           setOpenAddEditModal({ isShown: true, type: "add", data: null });
         }}>
-        <AiOutlineFileAdd className="text-[25px] text-white" />
+        <AiOutlineFileAdd className="text-lg sm:text-[25px] text-white" />
         New note
       </button>
 
@@ -171,7 +176,7 @@ const Home = () => {
           },
         }}
         contentLabel="Edit Note Modal"
-        className="w-1/2 max-h-3/4 bg-gray-800 rounded-md mx-auto mt-20 p-5"
+        className="w-[80%] sm:w-1/2 max-h-3/4 bg-gray-800 rounded-md mx-auto mt-20 p-5"
       >
         <AddEditNotes
           type={openAddEditModal.type}

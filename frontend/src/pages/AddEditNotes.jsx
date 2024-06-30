@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react"
-import TagInput from "../../components/Inputs/TagInput"
-import { MdClose } from "react-icons/md";
-import axiosInstance from "../../utils/axiosInstance";
 import { toast } from "react-toastify";
+import { MdClose } from "react-icons/md";
+import TagInput from "@/components/TagInput"
+import axiosInstance from "@/utils/axiosInstance";
 
 const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   const [title, setTitle] = useState(noteData?.title || "");
@@ -108,7 +107,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       <div className="flex flex-col gap-2">
         <input
           type="text"
-          className="text-2xl bg-slate-700 outline-none p-2 rounded-md font-semibold"
+          className="text-lg sm:text-2xl bg-slate-700 outline-none p-1 sm:p-2 rounded-md font-semibold"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -118,7 +117,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       <div className="flex flex-col gap-2 mt-4">
         <textarea
           type="text"
-          className="text-sm outline-none bg-slate-700 p-2 rounded-md resize-none font-semibold"
+          className="text-xs sm:text-sm outline-none bg-slate-700 p-2 rounded-md resize-none font-semibold"
           placeholder={`Write your notes here or Press '++' for AI autocomplete...`}
           rows={10}
           value={content}
@@ -132,7 +131,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
 
       {error && <p className="text-red-500 text-xs pt-4">{error}</p>}
 
-      <button className="btn-primary font-semibold mt-5 p-3" onClick={handleAddNote}>
+      <button className="btn-primary font-semibold mt-5 p-[0.5rem] sm:p-3" onClick={handleAddNote}>
         {type === "edit" ? "UPDATE" : "ADD"}
       </button>
     </section>
