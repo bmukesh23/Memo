@@ -12,14 +12,14 @@ const NoteCard = ({
     onPinNote,
 }) => {
     return (
-        <div className="rounded-md p-4 bg-slate-800 hover:shadow-xl transition-all ease-in-out font-semibold">
+        <div className="rounded-md px-4 py-8 bg-slate-800 hover:shadow-xl transition-all ease-in-out font-semibold">
             <div className="flex items-center justify-between">
                 <div>
                     <h6 className="text-sm">{title}</h6>
                     <span className="text-xs text-slate-300">{moment(date).format("DD MMM YYYY")}</span>
                 </div>
 
-                <MdOutlinePushPin className={`icon-btn ${isPinned ? 'text-primary' : 'text-slate-300'}`} onClick={onPinNote} />
+                <MdOutlinePushPin className={`icon-btn ${isPinned ? 'text-blue-600' : 'text-slate-300'} hover:cursor-pointer`} onClick={onPinNote} />
             </div>
 
             <p className="text-xs text-slate-300 mt-2">{content?.slice(0, 60)}</p>
@@ -29,11 +29,11 @@ const NoteCard = ({
 
                 <div className="flex items-center gap-2">
                     <MdCreate
-                        className="icon-btn hover:text-green-600"
+                        className="icon-btn hover:text-green-600 hover:cursor-pointer"
                         onClick={onEdit}
                     />
                     <MdDelete
-                        className="icon-btn hover:text-red-600"
+                        className="icon-btn hover:text-red-600 hover:cursor-pointer"
                         onClick={onDelete}
                     />
                 </div>

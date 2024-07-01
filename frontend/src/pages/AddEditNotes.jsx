@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { toast } from "react-toastify";
+import { useToast } from "@/components/ui/use-toast"
 import { MdClose } from "react-icons/md";
 import TagInput from "@/components/TagInput"
 import axiosInstance from "@/utils/axiosInstance";
@@ -9,6 +9,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   const [content, setContent] = useState(noteData?.content || "");
   const [tags, setTags] = useState(noteData?.tags || []);
   const [error, setError] = useState(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleInput = async () => {
@@ -20,7 +21,9 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
           setContent(content.slice(0, -2) + response.data.text);
         } catch (error) {
           console.error('Error communicating with the Gemini API', error);
-          toast.error('Failed to autocomplete content. Please try again.');
+          toast({
+            description: "Failed to autocomplete content. Please try again."
+          });
         }
       }
     };
@@ -43,16 +46,20 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       if (response.data && response.data.note) {
         getAllNotes();
         onClose();
-        toast.success("Note Added Successfully");
+        toast({
+          description: "Note Added Successfully"
+        })
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
-        toast.error("Failed to add note. Please try again.");
+        toast({
+          description: "Failed to add note. Please try again."
+        })
       }
     }
   }
-
+  
   // Edit Note
   const editNote = async () => {
     const noteId = noteData._id;
@@ -67,12 +74,16 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
       if (response.data && response.data.note) {
         getAllNotes();
         onClose();
-        toast.success("Note Updated Successfully");
+        toast({
+          description: "Note Updated Successfully"
+        })
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
-        toast.error("Failed to update note. Please try again.");
+        toast({
+          description: "Failed to update note. Please try again."
+        })
       }
     }
   }

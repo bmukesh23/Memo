@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 import Modal from "react-modal";
-import { toast } from "react-toastify";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import AddEditNotes from "./AddEditNotes";
 import axiosInstance from "@/utils/axiosInstance";
@@ -22,6 +22,7 @@ const Home = () => {
   const [allNotes, setAllNotes] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const [isSearch, setIsSearch] = useState(false);
+  const { toast } = useToast();
 
   const navigate = useNavigate();
 
@@ -68,11 +69,15 @@ const Home = () => {
 
       if (response.data && !response.data.error) {
         getAllNotes();
-        toast.success("Note Deleted Successfully");
+        toast({
+          description: "Note Deleted Successfully"
+        })
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
-        toast.error("Failed to delete note. Please try again.");
+        toast({
+          description: "Failed to delete note. Please try again."
+        })
         console.log("An Unexpected error occurre. Please try again.");
       }
     }
@@ -106,9 +111,13 @@ const Home = () => {
       if (response.data && response.data.note) {
         getAllNotes();
         if (noteData.isPinned) {
-          toast.success("Note Unpinned Successfully");
+          toast({
+            description: "Note Unpinned Successfully."
+          });
         } else {
-          toast.success("Note Pinned Successfully");
+          toast({
+            description: "Note Pinned Successfully."
+          });
         }
       }
     } catch (error) {
@@ -136,7 +145,7 @@ const Home = () => {
         </div>
 
         {allNotes.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 mx-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 mx-6 sm:mx-10">
             {allNotes.map((item) => (
               <NoteCard
                 key={item._id}
@@ -160,11 +169,11 @@ const Home = () => {
       </div>
 
       <button
-        className="flex items-center justify-center absolute right-5 sm:right-10 bottom-5 sm:bottom-20 gap-2 border border-slate-600 p-[0.4rem] sm:p-2 rounded-lg text-sm sm:text-base"
+        className="flex items-center justify-center fixed right-5 sm:right-10 bottom-20 gap-2 border border-slate-600 p-[0.4rem] sm:p-2 rounded-lg text-sm sm:text-[15px] lg:text-base"
         onClick={() => {
           setOpenAddEditModal({ isShown: true, type: "add", data: null });
         }}>
-        <AiOutlineFileAdd className="text-lg sm:text-[25px] text-white" />
+        <AiOutlineFileAdd className="text-lg sm:text-[20px] lg:text-2xl text-white" />
         New note
       </button>
 
