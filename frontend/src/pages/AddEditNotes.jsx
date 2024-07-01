@@ -11,26 +11,23 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const handleKeyDown = async (e) => {
-      if (e.key === '+') {
-        const lastTwoChars = content.slice(-1);
-        console.log(lastTwoChars);
-        if (lastTwoChars === '+') {
-          e.preventDefault();
-          try {
-            const response = await axiosInstance.post('/gemini', { content });
-            setContent(content.slice(0, -1) + response.data.text);
-          } catch (error) {
-            console.error('Error communicating with the Gemini API', error);
-            toast.error('Failed to autocomplete content. Please try again.');
-          }
+    const handleInput = async () => {
+      const lastTwoChars = content.slice(-2);
+      console.log(lastTwoChars);
+      if (lastTwoChars === '++') {
+        try {
+          const response = await axiosInstance.post('/gemini', { content });
+          setContent(content.slice(0, -2) + response.data.text);
+        } catch (error) {
+          console.error('Error communicating with the Gemini API', error);
+          toast.error('Failed to autocomplete content. Please try again.');
         }
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('input', handleInput);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('input', handleInput);
     };
   }, [content]);
 
